@@ -2,7 +2,7 @@
 
 <div class="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2">
     <div class="w-full">
-        <div class="grid max-w-xs grid-cols-2 gap-1 p-1 mx-auto my-2 bg-orange-100 rounded-lg" role="group">
+        <div class="grid max-w-xs grid-cols-3 gap-1 p-1 mx-auto my-2 bg-orange-100 rounded-lg" role="group">
             <ng-container *ngFor="let item of viewMenu; let i = index;">
                 <button type="button" (click)="selectMenu(i)" [ngClass]="item.active ? 'text-white bg-orange-900':'text-orange-900 hover:bg-gray-200'"
                     class="px-5 py-1.5 text-xs font-medium text-gray-900 hover:bg-blue-200 rounded-lg">
