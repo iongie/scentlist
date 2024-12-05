@@ -1,0 +1,103 @@
+<div class="bg-white fixed top-16 w-full flex items-center justify-center py-4 flex-wrap">
+    <button type="button" (click)="filter()"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === null,
+        'text-blue-700 border-blue-600 bg-white hover:bg-blue-700 hover:text-white': activeFilter !== null
+    }">
+        All categories
+    </button>
+    <button type="button" (click)="filter('Head')"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === 'Head',
+        'text-gray-900 border-white bg-white hover:border-gray-200': activeFilter !== 'Head'
+    }">
+        Head
+    </button>
+    <button type="button" (click)="filter('Head/Heart')"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === 'Head/Heart',
+        'text-gray-900 border-white bg-white hover:border-gray-200': activeFilter !== 'Head/Heart'
+    }">
+        Head/Heart
+    </button>
+    <button type="button" (click)="filter('Heart')"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === 'Heart',
+        'text-gray-900 border-white bg-white hover:border-gray-200': activeFilter !== 'Heart'
+    }">
+        Heart
+    </button>
+    <button type="button" (click)="filter('Heart/Base')"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === 'Heart/Base',
+        'text-gray-900 border-white bg-white hover:border-gray-200': activeFilter !== 'Heart/Base'
+    }">
+        Heart/Base
+    </button>
+    <button type="button" (click)="filter('Base')"
+        class="text-base font-medium px-5 py-2.5 text-center me-3 mb-3 rounded-full" [ngClass]="{
+        'text-white bg-blue-700 border-blue-600': activeFilter === 'Base',
+        'text-gray-900 border-white bg-white hover:border-gray-200': activeFilter !== 'Base'
+    }">
+        Base
+    </button>
+</div>
+<div class="mt-52">
+    <div class="columns-2 gap-4 space-y-4" [ngClass]="ganjil ?'md:columns-4':'md:columns-3'">
+        <ng-container *ngFor="let raw of rawMaterial; let i = index">
+            <div class="w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid"
+                [ngClass]="raw.height == 'small'? 'bg-emerald-100 divide-emerald-200':'bg-teal-100 divide-teal-200'">
+                <div class="flex flex-col items-start w-full p-4 overflow-auto">
+                    <span class="text-xs font-semibold px-2 py-0.5 border rounded-full text-center"
+                        [ngClass]="raw.height == 'small'? 'border-emerald-500':'border-teal-500'">
+                        {{raw.category}}
+                    </span>
+                    <span class="text-2xl font-semibold">
+                        {{raw.ingredient}}
+                    </span>
+                    <span class="text-base">
+                        {{raw.cas}}
+                    </span>
+                    <span class="text-xs pt-1">
+                        {{raw.filiation}}
+                    </span>
+                    <ng-container *ngFor="let detailRaw of raw.details; let i = index">
+                        <ng-container *ngIf="detailRaw.category === 'Major Components'">
+                            <span class="text-sm font-semibold pt-8">
+                                Major Components :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="detailRaw.category === 'Other names'">
+                            <span class="text-sm font-semibold pt-8">
+                                Other names :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="detailRaw.category === 'Uses in perfumery'">
+                            <span class="text-sm font-semibold pt-8">
+                                Use :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div class="flex flex-col items-start w-full px-4 py-2">
+                    <ng-container *ngFor="let detailRaw of raw.details; let i = index">
+                        <ng-container *ngIf="detailRaw.category === 'Volatility'">
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                    </ng-container>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
