@@ -1,106 +1,82 @@
-<nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
-            <span class="self-center text-2xl font-semibold whitespace-nowrap">Scentist</span>
-        </a>
-        <div class="flex md:order-2">
-            <div class="relative hidden md:block">
-                <div class="relative md:block">
-                    <button type="button" id="default-search"
-                        class="md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
-                        <div class="flex items-center justify-center gap-4">
-                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            Search
-                        </div>
-                        <div>
-                            Ctrl K
-                        </div>
-                    </button>
-                </div>
-            </div>
-            <button data-collapse-toggle="navbar-search" type="button"
-                class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
-                aria-controls="navbar-search" aria-expanded="false">
-                <span class="sr-only">Open main menu</span>
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 17 14">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 1h15M1 7h15M1 13h15" />
-                </svg>
-            </button>
-        </div>
-        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
-            <div class="relative mt-3 md:hidden">
-                <div class="relative md:block">
-                    <button type="button" id="default-search"
-                        class="md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
-                        <div class="flex items-center justify-center gap-4">
-                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 20 20">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                            </svg>
-                            Search
-                        </div>
-                        <div>
-                            Ctrl K
-                        </div>
-                    </button>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</nav>
-
-<ng-container *ngIf="viewSearch">
-    <div
-        class="fixed z-50 top-0 right-1 flex justify-center items-center w-screen h-screen backdrop-blur-sm bg-black/10 cursor-pointer">
-        <div class="flex flex-col md:w-2/4 w-full min-h-96 bg-white rounded-lg m-4">
-            <div class="w-full flex flex-col divide-y">
-                <div class="flex flex-row gap-8 items-center p-4">
-                    <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
-                    <input type="text"
-                        class="flex w-full h-12 text-lg border-none border-0 outline-none focus:outline-none focus:border-0 focus:ring-0 p-0">
-                    <span
-                        class="p-1 text-sm font-semibold border border-gray-300 rounded-lg text-gray-500 hover:text-gray-700">esc</span>
-                </div>
-                <div class="flex flex-col justify-start items-center outline-none p-4 gap-4">
-                    <ng-container>
-                        <div
-                            class="flex flex-row justify-start items-center gap-2 w-full h-auto p-2 rounded-lg bg-slate-100 hover:bg-blue-300 hover:text-white">
-                            <span class="w-8 h-8 text-xl font-semibold border rounded-md text-center">#</span>
-                            <div class="flex flex-col items-start w-full h-full">
-                                <span class="text-xs font-semibold p-2 border rounded-full text-center">
-                                    Pondok Aren
-                                </span>
-                                <span class="text-xl">
-                                    Jumlah TPS
-                                </span>
+<ng-container>
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+                <span class="self-center text-2xl font-semibold whitespace-nowrap">Scentist</span>
+            </a>
+            <div class="flex md:order-2">
+                <div class="md:flex gap-4 relative hidden">
+                    <div class="relative md:block">
+                        <button type="button" id="default-search"
+                            class="md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
+                            <div class="flex items-center justify-center gap-4">
+                                <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                </svg>
+                                Search
                             </div>
+                            <div>
+                                Ctrl F
+                            </div>
+                        </button>
+                    </div>
+    
+                    <button (click)="openFiltering()" type="button" id="default-search"
+                        class="material-icons w-auto text-xl text-gray-500 outline-none">
+                        tune
+                    </button>
+    
+                    <button (click)="openFiltering()" type="button" id="default-search"
+                        class="material-icons w-auto text-xl text-gray-500 outline-none">
+                        help
+                    </button>
+                </div>
+                <button data-collapse-toggle="navbar-search" type="button"
+                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    aria-controls="navbar-search" aria-expanded="false">
+                    <span class="sr-only">Open main menu</span>
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 1h15M1 7h15M1 13h15" />
+                    </svg>
+                </button>
+            </div>
+            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+                <div class="flex w-full gap-1 relative mt-3 md:hidden">
+                    <button type="button" id="default-search"
+                        class="md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
+                        <div class="flex items-center justify-center gap-4">
+                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                            Search
                         </div>
-                    </ng-container>
-
-                    <ng-container>
-                        <div class="flex flex-row justify-center items-center gap-2 w-full h-auto p-2 rounded-lg">
-                            <span class="text-xl text-center">
-                                No Result for
-                                <strong>"apahsodnskdfbsmdbsj"</strong>
-                            </span>
-
+                        <div>
+                            Ctrl F
                         </div>
-                    </ng-container>
+                    </button>
+    
+                    <button (click)="openFiltering()" type="button" id="default-search"
+                        class="material-icons w-auto text-xl text-gray-500 outline-none">
+                        tune
+                    </button>
+    
+                    <button (click)="openFiltering()" type="button" id="default-search"
+                        class="material-icons w-auto text-xl text-gray-500 outline-none">
+                        help
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
+    </nav>
+
+    <app-filtering-data [openView]="filteringData" (closeView)="closeFiltering($event)"></app-filtering-data>
+    <app-info [openView]="infoApp" (closeView)="closeInfoApp($event)"></app-info>
+    <app-searching-data  [openView]="searchingData" (closeView)="closeSearching($event)"></app-searching-data>
 </ng-container>

@@ -1,11 +1,110 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import * as goodScent from "../../json/good_scent_raw_material.json";
+import * as synthetics from "../../json/synthetics_detail_raw_material.json";
+import * as listGs from "../../json/list_good_scent_raw_material.json";
+import { combineLatest, Subject, takeUntil, tap } from 'rxjs';
+import { RawMaterial } from '../../interfaces/raw-material.interface';
+import { CommonModule } from '@angular/common';
+import { FilteringDataComponent } from '../../components/filtering-data/filtering-data.component';
+import { FilterDataService } from '../../services/filter-data/filter-data.service';
 
 @Component({
   selector: 'app-formula',
-  imports: [],
+  imports: [
+    CommonModule
+  ],
   templateUrl: './formula.component.html',
   styleUrl: './formula.component.css'
 })
-export class FormulaComponent {
+export class FormulaComponent implements OnInit, OnDestroy {
+  private destroy: Subject<void> = new Subject<void>();
+  goodScentRaw: RawMaterial[] = (goodScent as any).default;
+  syntheticsRaw: RawMaterial[] = (synthetics as any).default;
+  listGs: RawMaterial[] = (listGs as any).default;
+  rawMaterial!: RawMaterial[]
+  ganjil!: boolean;
+  normalView!: boolean;
+
+  constructor(
+    private filterService: FilterDataService
+  ) { }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
+  }
+
+  ngOnInit(): void {
+    this.filter();
+    this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
+      let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
+      return {
+        ...gsr,
+        height: i % 2 === 0
+          ? 'long'
+          : 'small',
+        details: gs.details
+      }
+    })
+
+    this.ganjil = this.rawMaterial.length % 2 === 0 ? false : true;
+  }
+
+  extractAfterColon(text: string): string {
+    const parts = text.split(':');
+    return parts.length > 1 ? parts[1].trim() : "";
+  }
+
+  filter() {
+    combineLatest([
+      this.filterService.getNote,
+      this.filterService.getStrength
+    ])
+      .pipe(
+        tap(([note, str]) => {
+          console.log(note, str);
+          this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
+            let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
+            return {
+              ...gsr,
+              height: i % 2 === 0
+                ? 'long'
+                : 'small',
+              details: gs.details
+            }
+          })
+
+          this.ganjil = this.rawMaterial.length % 2 === 0 ? false : true;
+          if (note) {
+            this.rawMaterial = this.rawMaterial.filter((data) =>
+              data.details?.some(detail => detail.category === 'Volatility' && detail.info === note)
+            );
+          }
+
+          if (str) {
+            this.rawMaterial = this.rawMaterial.filter(data =>
+              data.odor_strength?.toLowerCase().includes(str.toLowerCase())
+            );
+          }
+
+          this.rawMaterial = this.rawMaterial.map((data, index) => {
+            return {
+              ...data,
+              height: index % 2 === 0
+                ? 'long'
+                : 'small'
+            }
+          })
+
+          this.ganjil = this.rawMaterial.length % 2 === 0 ? true : true;
+        }),
+        takeUntil(this.destroy)
+      )
+      .subscribe()
+  }
+
+  kecilkan() {
+    this.normalView = !this.normalView;
+  }
 
 }

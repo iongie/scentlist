@@ -1,0 +1,57 @@
+<ng-container *ngIf="view">
+    <div class="fixed z-50 top-0 right-1 flex flex-col justify-center items-center w-screen h-screen backdrop-blur-sm bg-black/10 cursor-pointer"> 
+        <div class="flex flex-col md:w-2/4 w-full min-h-96 bg-white rounded-lg m-4 p-4">
+            <button class="material-icon bg-red-500 text-white px-2 py-1 rounded text-xs self-end mb-4" (click)="closeInfo()">
+                close
+            </button>
+    
+            <table class="table-fixed w-full border border-gray-300">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="border px-2 py-1 text-left text-xs">Karakteristik</th>
+                        <th class="border px-2 py-1 text-left text-xs">Aroma Ringan</th>
+                        <th class="border px-2 py-1 text-left text-xs">Aroma Moderat</th>
+                        <th class="border px-2 py-1 text-left text-xs">Aroma Berat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-2 py-1 text-xs">Boiling Point</td>
+                        <td class="border px-2 py-1 text-xs">&lt; 200°C</td>
+                        <td class="border px-2 py-1 text-xs">200°C-250°C</td>
+                        <td class="border px-2 py-1 text-xs">&gt; 250°C</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="border px-2 py-1 text-xs">Vapor Pressure</td>
+                        <td class="border px-2 py-1 text-xs">&gt; 1 mmHg (menyebar)</td>
+                        <td class="border px-2 py-1 text-xs">0.01 - 1 mmHg</td>
+                        <td class="border px-2 py-1 text-xs">&lt; 0.01 mmHg (menempel)</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-2 py-1 text-xs">LogP</td>
+                        <td class="border px-2 py-1 text-xs">&lt; 2 (volatil)</td>
+                        <td class="border px-2 py-1 text-xs">2 - 4</td>
+                        <td class="border px-2 py-1 text-xs">&gt; 4 (tahan lama)</td>
+                    </tr>
+                    <tr class="bg-gray-50">
+                        <td class="border px-2 py-1 text-xs">Karakteristik Aroma</td>
+                        <td class="border px-2 py-1 text-xs">Segar, ringan</td>
+                        <td class="border px-2 py-1 text-xs">Karakter Utama</td>
+                        <td class="border px-2 py-1 text-xs">Hangat, sensual</td>
+                    </tr>
+                </tbody>
+            </table>
+        
+            <p class="mt-4 text-xs">
+                <strong>LogP</strong> menunjukkan apakah suatu molekul hidropolik (larut dalam air) atau lipofilik (larut dalam
+                lemak).
+                <br><br>
+                <strong>Boiling Point (Titik Didih)</strong> dalam parfum menunjukkan suhu di mana suatu senyawa beralih dari
+                cair menjadi gas, yang memengaruhi volatilitas, proyeksi, dan ketahanan parfum.
+                <br><br>
+                <strong>Vapor Pressure (Tekanan Uap)</strong> mengacu pada seberapa mudah suatu bahan menguap ke udara, yang
+                menentukan difusi dan daya tahan aroma.
+            </p>
+        </div>
+    </div>
+</ng-container>

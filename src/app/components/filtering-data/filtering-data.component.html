@@ -1,0 +1,61 @@
+<ng-container *ngIf="view">
+    <div
+        class="fixed z-50 top-0 right-1 flex flex-col justify-center items-center w-screen h-screen backdrop-blur-sm bg-black/10 cursor-pointer">
+        <div class="flex flex-col md:w-2/4 w-full min-h-20 bg-white rounded-lg m-4 p-6">
+
+            <button class="material-icons bg-red-500 text-white px-2 py-1 rounded text-xs self-end mb-4"
+                (click)="closeFiltering()">
+                close
+            </button>
+
+            <!-- Filter by Notes -->
+            <h4 class="text-base font-medium mb-4 text-left px-5">Filter by Notes</h4>
+            <div class="flex flex-wrap gap-2 px-5">
+                <button *ngFor="let category of ['All', 'Head', 'Head/Heart', 'Heart', 'Heart/Base', 'Base']"
+                    type="button" (click)="selectNote(category === 'All' ? undefined : category)"
+                    class="text-sm font-medium px-4 py-2.5 text-center rounded-full transition-colors duration-200"
+                    [ngClass]="{
+                        'text-white bg-blue-700 border-blue-600': activeFilterNote === (category === 'All' ? undefined : category),
+                        'text-gray-900 border border-gray-200 bg-white hover:bg-blue-700 hover:text-white': activeFilterNote !== (category === 'All' ? undefined : category)
+                    }">
+                    {{ category }}
+                </button>
+            </div>
+
+            <!-- Divider -->
+            <div class="my-6 border-t border-gray-300"></div>
+
+            <!-- Filter by Odor Strength -->
+            <h4 class="text-base font-medium mb-4 text-left px-5">Filter by Odor Strength</h4>
+            <div class="flex flex-wrap gap-2 px-5">
+                <button *ngFor="let category of ['All', 'Low', 'Medium', 'High', 'Very High']" type="button"
+                    (click)="selectStrength(category === 'All' ? undefined : category)"
+                    class="text-sm font-medium px-4 py-2.5 text-center rounded-full transition-colors duration-200"
+                    [ngClass]="{
+                        'text-white bg-teal-700 border-teal-600': activeFilterStrength === (category === 'All' ? undefined : category),
+                        'text-gray-900 border border-gray-200 bg-white hover:bg-teal-700 hover:text-white': activeFilterStrength !== (category === 'All' ? undefined : category)
+                    }">
+                    {{ category }}
+                </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex justify-center mt-6 gap-3">
+                <!-- Apply Filter Button -->
+                <button 
+                    (click)="applyFilters()" 
+                    class="bg-orange-900 text-white px-6 py-2 rounded-full text-sm transition-colors duration-200 hover:bg-orange-500 hover:shadow-lg">
+                    Apply Filter
+                </button>
+
+                <!-- Reset Filter Button -->
+                <button 
+                    (click)="resetFilters()" 
+                    class="bg-white text-orange-900 px-6 py-2 rounded-full text-sm border border-orange-500 transition-colors duration-200 hover:bg-orange-500 hover:text-white hover:shadow-lg">
+                    Reset Filter
+                </button>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

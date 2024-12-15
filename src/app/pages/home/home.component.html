@@ -63,7 +63,7 @@
                     </span>
                     <ng-container *ngFor="let detailRaw of raw.details; let i = index">
                         <ng-container *ngIf="detailRaw.category === 'Major Components'">
-                            <span class="text-sm font-semibold pt-8">
+                            <span class="text-sm font-semibold pt-2">
                                 Major Components :
                             </span>
                             <span class="text-xs font-semibold">
@@ -71,7 +71,7 @@
                             </span>
                         </ng-container>
                         <ng-container *ngIf="detailRaw.category === 'Other names'">
-                            <span class="text-sm font-semibold pt-8">
+                            <span class="text-sm font-semibold pt-2">
                                 Other names :
                             </span>
                             <span class="text-xs font-semibold">
@@ -79,8 +79,32 @@
                             </span>
                         </ng-container>
                         <ng-container *ngIf="detailRaw.category === 'Uses in perfumery'">
-                            <span class="text-sm font-semibold pt-8">
+                            <span class="text-sm font-semibold pt-2">
                                 Use :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="detailRaw.category === 'Molecular Weight'">
+                            <span class="text-sm font-semibold pt-2">
+                                Weight :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="detailRaw.category === 'Detection Threshold'">
+                            <span class="text-sm font-semibold pt-2">
+                                Detection Threshold :
+                            </span>
+                            <span class="text-xs font-semibold">
+                                {{detailRaw.info}}
+                            </span>
+                        </ng-container>
+                        <ng-container *ngIf="detailRaw.category === 'Log P'">
+                            <span class="text-sm font-semibold pt-2">
+                                Log P :
                             </span>
                             <span class="text-xs font-semibold">
                                 {{detailRaw.info}}

@@ -1,0 +1,91 @@
+import { CommonModule } from '@angular/common';
+import { Component, HostListener, input, OnChanges, output, SimpleChanges } from '@angular/core';
+import { FilterDataService } from '../../services/filter-data/filter-data.service';
+
+@Component({
+  selector: 'app-filtering-data',
+  imports: [
+    CommonModule
+  ],
+  templateUrl: './filtering-data.component.html',
+  styleUrl: './filtering-data.component.css'
+})
+export class FilteringDataComponent implements OnChanges {
+  view!: boolean;
+  openView = input<boolean>();
+  closeView = output<boolean>();
+  activeFilterNote!: string;
+  activeFilterStrength!: string;
+
+  constructor(
+    private filterService: FilterDataService
+  ){
+
+  }
+  closeFiltering() {
+    this.closeView.emit(false);
+    this.view = false;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['openView']) {
+      this.view = changes['openView'].currentValue
+    }
+  }
+  
+    @HostListener('document:keydown', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+      if (event.ctrlKey && event.key === 'k') {
+        event.preventDefault();
+        return;
+      }
+  
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        this.escape();
+        return;
+      }
+
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        this.enter();
+        return;
+      }
+    }
+  
+    escape() {
+      this.closeView.emit(false);
+      this.view = false;
+    }
+
+    enter(){
+      this.filterService.updateNote(this.activeFilterNote);
+      this.filterService.updateStrength(this.activeFilterStrength);
+      this.closeView.emit(false);
+      this.view = false;
+    }
+
+    selectNote(by?:string){
+      this.activeFilterNote = by! || undefined!;
+    }
+
+    selectStrength(by?:string){
+      this.activeFilterStrength = by! || undefined!;
+    }
+
+    applyFilters(){
+      this.filterService.updateNote(this.activeFilterNote);
+      this.filterService.updateStrength(this.activeFilterStrength);
+      this.closeView.emit(false);
+      this.view = false;
+    }
+
+    resetFilters(){
+      this.filterService.updateNote(undefined!);
+      this.filterService.updateStrength(undefined!);
+      this.activeFilterNote = undefined!;
+      this.activeFilterStrength = undefined!;
+      this.closeView.emit(false);
+      this.view = false;
+    }
+}

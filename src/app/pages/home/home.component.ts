@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RawMaterial } from '../../interfaces/raw-material.interface';
 import * as natural from "../../json/natural_details_raw_material.json";
 import * as synthetics from "../../json/synthetics_detail_raw_material.json";
+import * as goodScent from "../../json/good_scent_raw_material.json";
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil, tap } from 'rxjs';
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
   naturalRaw: RawMaterial[] = (natural as any).default;
   syntheticsRaw: RawMaterial[] = (synthetics as any).default;
+  goodScentRaw: RawMaterial[] = (goodScent as any).default;
   rawMaterial!: RawMaterial[]
   type!: string;
   activeFilter!: string | null;
@@ -50,7 +52,10 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
           })
           this.ganjil = this.rawMaterial.length % 2 === 0 ? false: true;
-          console.log(this.type, this.rawMaterial.length / 4, this.rawMaterial.length / 3);
+          let contoh = this.rawMaterial.map((data, index) => {
+            return data.ingredient
+          })
+          console.log(contoh);
           
         }),
         takeUntil(this.destroy)
@@ -70,7 +75,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
           if (by) {
             this.rawMaterial = this.rawMaterial.filter((data) =>
-              data.details.some(detail => detail.category === 'Volatility' && detail.info === by)
+              data.details?.some(detail => detail.category === 'Volatility' && detail.info === by)
             );
           }
 
