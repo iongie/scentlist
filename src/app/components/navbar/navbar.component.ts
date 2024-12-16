@@ -20,7 +20,7 @@ export class NavbarComponent {
   handleKeyboardEvent(event: KeyboardEvent) {
     if (event.ctrlKey && event.key === 'u') {
       event.preventDefault();
-      this.onCtrlU();
+      // this.onCtrlU();
       return;
     }
 
