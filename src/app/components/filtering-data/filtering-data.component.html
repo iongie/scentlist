@@ -1,7 +1,14 @@
 <ng-container *ngIf="view">
     <div
         class="fixed z-50 top-0 right-1 flex flex-col justify-center items-center w-screen h-screen backdrop-blur-sm bg-black/10 cursor-pointer">
-        <div class="flex flex-col md:w-2/4 w-full min-h-20 bg-white rounded-lg m-4 p-6">
+        <div class="
+        flex flex-col md:w-2/4 w-full min-h-20 
+        max-h-96 bg-white rounded-lg m-4 p-6 
+        overflow-auto [&::-webkit-scrollbar]:w-2
+        [&::-webkit-scrollbar-track]:rounded-full
+        [&::-webkit-scrollbar-track]:bg-gray-100
+        [&::-webkit-scrollbar-thumb]:rounded-full
+        [&::-webkit-scrollbar-thumb]:bg-gray-300">
 
             <button class="material-icons bg-red-500 text-white px-2 py-1 rounded text-xs self-end mb-4"
                 (click)="closeFiltering()">
@@ -43,8 +50,9 @@
             <!-- Filter by Odor Strength -->
             <h4 class="text-base font-medium mb-4 text-left px-5">Filter by Odor Type</h4>
             <div class="flex flex-wrap gap-2 px-5">
-                <button *ngFor="let category of ['All', 'Ambery', 'Balsamic', 'Burnt', 'Citrus', 'Green', 'Floral', 'Flower', 'Fruity', 'Musky', 'Spicy', 'Undergrowth', 'Woody']" type="button"
-                    (click)="selectType(category === 'All' ? undefined : category)"
+                <button
+                    *ngFor="let category of ['All', 'Ambery', 'Balsamic', 'Burnt', 'Citrus', 'Green', 'Floral', 'Flower', 'Fruity', 'Musky', 'Spicy', 'Undergrowth', 'Woody']"
+                    type="button" (click)="selectType(category === 'All' ? undefined : category)"
                     class="text-sm font-medium px-4 py-2.5 text-center rounded-full transition-colors duration-200"
                     [ngClass]="{
                         'text-white bg-orange-700 border-orange-600': activeFilterType === (category === 'All' ? undefined : category),
@@ -57,15 +65,13 @@
             <!-- Action Buttons -->
             <div class="flex justify-center mt-6 gap-3">
                 <!-- Apply Filter Button -->
-                <button 
-                    (click)="applyFilters()" 
+                <button (click)="applyFilters()"
                     class="bg-orange-900 text-white px-6 py-2 rounded-full text-sm transition-colors duration-200 hover:bg-orange-500 hover:shadow-lg">
                     Apply Filter
                 </button>
 
                 <!-- Reset Filter Button -->
-                <button 
-                    (click)="resetFilters()" 
+                <button (click)="resetFilters()"
                     class="bg-white text-orange-900 px-6 py-2 rounded-full text-sm border border-orange-500 transition-colors duration-200 hover:bg-orange-500 hover:text-white hover:shadow-lg">
                     Reset Filter
                 </button>

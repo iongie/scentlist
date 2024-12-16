@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import * as goodScent from "../../json/good_scent_raw_material.json";
-import * as synthetics from "../../json/synthetics_detail_raw_material.json";
-import * as listGs from "../../json/list_good_scent_raw_material.json";
+import * as goodScent from "../../../../json/good_scent_raw_material.json";
+import * as synthetics from "../../../../json/synthetics_detail_raw_material.json";
+import * as listGs from "../../../../json/list_good_scent_raw_material.json";
 import { combineLatest, Subject, takeUntil, tap } from 'rxjs';
 import { RawMaterial } from '../../interfaces/raw-material.interface';
 import { CommonModule } from '@angular/common';
