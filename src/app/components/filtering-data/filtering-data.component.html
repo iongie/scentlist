@@ -37,6 +37,21 @@
                     }">
                     {{ category }}
                 </button>
+            </div> <!-- Divider -->
+            <div class="my-6 border-t border-gray-300"></div>
+
+            <!-- Filter by Odor Strength -->
+            <h4 class="text-base font-medium mb-4 text-left px-5">Filter by Odor Type</h4>
+            <div class="flex flex-wrap gap-2 px-5">
+                <button *ngFor="let category of ['All', 'Ambery', 'Balsamic', 'Burnt', 'Citrus', 'Green', 'Floral', 'Flower', 'Fruity', 'Musky', 'Spicy', 'Undergrowth', 'Woody']" type="button"
+                    (click)="selectType(category === 'All' ? undefined : category)"
+                    class="text-sm font-medium px-4 py-2.5 text-center rounded-full transition-colors duration-200"
+                    [ngClass]="{
+                        'text-white bg-orange-700 border-orange-600': activeFilterType === (category === 'All' ? undefined : category),
+                        'text-gray-900 border border-gray-200 bg-white hover:bg-orange-700 hover:text-white': activeFilterType !== (category === 'All' ? undefined : category)
+                    }">
+                    {{ category }}
+                </button>
             </div>
 
             <!-- Action Buttons -->

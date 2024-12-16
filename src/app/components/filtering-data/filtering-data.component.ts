@@ -16,6 +16,7 @@ export class FilteringDataComponent implements OnChanges {
   closeView = output<boolean>();
   activeFilterNote!: string;
   activeFilterStrength!: string;
+  activeFilterType!: string;
 
   constructor(
     private filterService: FilterDataService
@@ -61,6 +62,7 @@ export class FilteringDataComponent implements OnChanges {
     enter(){
       this.filterService.updateNote(this.activeFilterNote);
       this.filterService.updateStrength(this.activeFilterStrength);
+      this.filterService.updateType(this.activeFilterType);
       this.closeView.emit(false);
       this.view = false;
     }
@@ -73,9 +75,14 @@ export class FilteringDataComponent implements OnChanges {
       this.activeFilterStrength = by! || undefined!;
     }
 
+    selectType(by?:string){
+      this.activeFilterType = by! || undefined!;
+    }
+
     applyFilters(){
       this.filterService.updateNote(this.activeFilterNote);
       this.filterService.updateStrength(this.activeFilterStrength);
+      this.filterService.updateType(this.activeFilterType);
       this.closeView.emit(false);
       this.view = false;
     }
@@ -83,8 +90,10 @@ export class FilteringDataComponent implements OnChanges {
     resetFilters(){
       this.filterService.updateNote(undefined!);
       this.filterService.updateStrength(undefined!);
+      this.filterService.updateType(undefined!);
       this.activeFilterNote = undefined!;
       this.activeFilterStrength = undefined!;
+      this.activeFilterType = undefined!;
       this.closeView.emit(false);
       this.view = false;
     }

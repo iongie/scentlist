@@ -58,11 +58,11 @@ export class FormulaComponent implements OnInit, OnDestroy {
   filter() {
     combineLatest([
       this.filterService.getNote,
-      this.filterService.getStrength
+      this.filterService.getStrength,
+      this.filterService.getType
     ])
       .pipe(
-        tap(([note, str]) => {
-          console.log(note, str);
+        tap(([note, str, type]) => {
           this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
             let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
             return {
@@ -87,6 +87,13 @@ export class FormulaComponent implements OnInit, OnDestroy {
             );
           }
 
+          if (type) {
+            const normalizedSearch = type.replace(/\s+/g, '').toLowerCase();
+            this.rawMaterial = this.rawMaterial.filter(data =>
+              data.filiation?.replace(/\s+/g, '').toLowerCase().includes(normalizedSearch)
+            );
+          }
+          
           this.rawMaterial = this.rawMaterial.map((data, index) => {
             return {
               ...data,

@@ -10,6 +10,9 @@ export class FilterDataService {
   
   strength = new BehaviorSubject<string>('');
   getStrength = this.strength.asObservable();
+
+  type = new BehaviorSubject<string>('');
+  getType = this.type.asObservable();
   constructor() { }
 
   async updateNote(noteBaru: string) {
@@ -18,5 +21,9 @@ export class FilterDataService {
 
   async updateStrength(strengthBaru: string) {
     this.strength.next(strengthBaru)
+  }
+
+  async updateType(tipeBaru: string) {
+    this.type.next(tipeBaru)
   }
 }
