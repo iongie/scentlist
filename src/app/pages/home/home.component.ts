@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RawMaterial } from '../../interfaces/raw-material.interface';
-import * as natural from "../../../../json/natural_details_raw_material.json";
-import * as synthetics from "../../../../json/synthetics_detail_raw_material.json";
-import * as goodScent from "../../../../json/good_scent_raw_material.json";
+import * as natural from "../../../../public/natural_details_raw_material.json";
+import * as synthetics from "../../../../public/synthetics_detail_raw_material.json";
+import * as goodScent from "../../../../public/good_scent_raw_material.json";
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil, tap } from 'rxjs';
