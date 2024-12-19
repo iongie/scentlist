@@ -16,6 +16,9 @@ interface RawMaterial {
     boiling_point?: string;
     vapor_pressure?: string;
     logP?: string;
+    soluble?: string;
+    insoluble?: string;
+    stability?: string;
     odor_strength?: string;
     details?: RawMaterialDetail[]
 }
