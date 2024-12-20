@@ -5,7 +5,6 @@ import * as listGs from "../../../../public/list_good_scent_raw_material.json";
 import { combineLatest, Subject, takeUntil, tap } from 'rxjs';
 import { RawMaterial } from '../../interfaces/raw-material.interface';
 import { CommonModule } from '@angular/common';
-import { FilteringDataComponent } from '../../components/filtering-data/filtering-data.component';
 import { FilterDataService } from '../../services/filter-data/filter-data.service';
 
 @Component({

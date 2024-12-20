@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RawMaterial } from '../../interfaces/raw-material.interface';
-import * as natural from "../../../../public/natural_details_raw_material.json";
-import * as synthetics from "../../../../public/synthetics_detail_raw_material.json";
 import * as goodScent from "../../../../public/good_scent_raw_material.json";
+import * as synthetics from "../../../../public/synthetics_detail_raw_material.json";
+import * as listGs from "../../../../public/list_good_scent_raw_material.json";
+import { combineLatest, Subject, takeUntil, tap } from 'rxjs';
+import { RawMaterial } from '../../interfaces/raw-material.interface';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { FilterDataService } from '../../services/filter-data/filter-data.service';
 
 @Component({
   selector: 'app-home',
@@ -17,15 +17,15 @@ import { Subject, takeUntil, tap } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private destroy: Subject<void> = new Subject<void>();
-  naturalRaw: RawMaterial[] = (natural as any).default;
-  syntheticsRaw: RawMaterial[] = (synthetics as any).default;
   goodScentRaw: RawMaterial[] = (goodScent as any).default;
+  syntheticsRaw: RawMaterial[] = (synthetics as any).default;
+  listGs: RawMaterial[] = (listGs as any).default;
   rawMaterial!: RawMaterial[]
-  type!: string;
-  activeFilter!: string | null;
   ganjil!: boolean;
+  normalView!: boolean;
+
   constructor(
-    private activeRoute: ActivatedRoute
+    private filterService: FilterDataService
   ) { }
 
   ngOnDestroy(): void {
@@ -34,51 +34,65 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activeRoute.paramMap
-      .pipe(
-        tap((params) => {
-          this.activeFilter = null;
-          this.type = params.get('type')!;
-          this.rawMaterial = this.type === 'synthetics'
-            ? this.syntheticsRaw
-            : this.naturalRaw;
+    this.filter();
+    this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
+      let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
+      return {
+        ...gsr,
+        height: i % 2 === 0
+          ? 'long'
+          : 'small',
+        details: gs.details
+      }
+    })
 
-          this.rawMaterial = this.rawMaterial.map((data, index) => {
-            return {
-              ...data,
-              height: index % 2 === 0
-                ? 'long'
-                : 'small'
-            }
-          })
-          this.ganjil = this.rawMaterial.length % 2 === 0 ? false: true;
-          let contoh = this.rawMaterial.map((data, index) => {
-            return data.ingredient
-          })
-          console.log(contoh);
-          
-        }),
-        takeUntil(this.destroy)
-      ).subscribe()
+    this.ganjil = this.rawMaterial.length % 2 === 0 ? false : true;
   }
 
+  extractAfterColon(text: string): string {
+    const parts = text.split(':');
+    return parts.length > 1 ? parts[1].trim() : "";
+  }
 
-  filter(by?: string) {
-    this.activeRoute.paramMap
+  filter() {
+    combineLatest([
+      this.filterService.getNote,
+      this.filterService.getStrength,
+      this.filterService.getType
+    ])
       .pipe(
-        tap((params) => {
-          this.activeFilter = by! || null;
-          this.type = params.get('type')!;
-          this.rawMaterial = this.type === 'synthetics'
-            ? this.syntheticsRaw
-            : this.naturalRaw;
+        tap(([note, str, type]) => {
+          this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
+            let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
+            return {
+              ...gsr,
+              height: i % 2 === 0
+                ? 'long'
+                : 'small',
+              details: gs.details
+            }
+          })
 
-          if (by) {
+          this.ganjil = this.rawMaterial.length % 2 === 0 ? false : true;
+          if (note) {
             this.rawMaterial = this.rawMaterial.filter((data) =>
-              data.details?.some(detail => detail.category === 'Volatility' && detail.info === by)
+              data.details?.some(detail => detail.category === 'Volatility' && detail.info === note)
             );
           }
 
+          if (str) {
+            this.rawMaterial = this.rawMaterial.filter(data =>
+              data.odor_strength?.toLowerCase().includes(str.toLowerCase())
+            );
+          }
+
+          if (type) {
+            const normalizedSearch = type.replace(/\s+/g, '').toLowerCase();
+            this.rawMaterial = this.rawMaterial.filter(data =>
+              data.filiation?.replace(/\s+/g, '').toLowerCase().includes(normalizedSearch)
+            );
+          }
+          
           this.rawMaterial = this.rawMaterial.map((data, index) => {
             return {
               ...data,
@@ -88,11 +102,15 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
           })
 
-          this.ganjil = this.rawMaterial.length % 2 === 0 ? true: true;
-          console.log(this.type, this.rawMaterial.length / 4, this.rawMaterial.length / 3);
+          this.ganjil = this.rawMaterial.length % 2 === 0 ? true : true;
         }),
         takeUntil(this.destroy)
-      ).subscribe()
+      )
+      .subscribe()
+  }
+
+  kecilkan() {
+    this.normalView = !this.normalView;
   }
 
 }

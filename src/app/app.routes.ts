@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo: 'formula',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
@@ -11,7 +11,7 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/formula/formula.component').then(c => c.FormulaComponent)
     },
     {
-        path: ':type',
+        path: 'home',
         loadComponent: () => import('./pages/home/home.component').then(c => c.HomeComponent)
     },
 ];

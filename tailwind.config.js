@@ -5,7 +5,11 @@ module.exports = {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Nunito', '"Open Sans"', '"Nunito Sans"'],
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin')
