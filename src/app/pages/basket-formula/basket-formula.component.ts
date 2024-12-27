@@ -17,6 +17,7 @@ export class BasketFormulaComponent implements OnInit, OnDestroy {
   ganjil!: boolean;
   normalView!: boolean;
   formula!: Formulas;
+  private updateTimeout: any;
   constructor(
     private formulaService: FormulasService,
     private router: Router
@@ -29,23 +30,21 @@ export class BasketFormulaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formulaService.getFormulaBasket
-    .pipe(
-      tap(x=>{
-        this.formula = x;
-      }),
-      takeUntil(this.destroy)
-    ).subscribe()
+      .pipe(
+        tap(x => {
+          this.formula = x;
+        }),
+        takeUntil(this.destroy)
+      ).subscribe()
   }
 
-  deleteFormula(i: number){
-    if (i > -1 && i < this.formula.detail.length) {
-      this.formula.detail.splice(i, 1);  // Correct way to delete by index
-    } else {
-      console.error('Index out of bounds');
-    }
+  async deleteFormula(i: number) {
+    await this.formula.detail.splice(i, 1);
+    await this.formulaService.updateFormula(this.formula)
+
   }
 
-  saveFormula(){
+  saveFormula() {
     this.formulaService.update(this.formula)
     this.formulaService.updateFormula(
       {
@@ -57,7 +56,7 @@ export class BasketFormulaComponent implements OnInit, OnDestroy {
     this.router.navigate(['formula'])
   }
 
-  cancelFormula(){
+  cancelFormula() {
     this.formulaService.updateFormula(
       {
         name: 'no name',

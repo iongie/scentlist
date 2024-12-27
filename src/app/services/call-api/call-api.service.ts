@@ -12,7 +12,7 @@ export class CallApiService {
     private http: HttpClient,
   ) { }
 
-  create(page_url?: string, bin_name?:string){
+  create(bin_name?:string){
     let headers = new HttpHeaders();
     headers = headers.append('X-Bin-Private', "true");
 
@@ -33,7 +33,30 @@ export class CallApiService {
     }
     
     return this.http.get(
-      environment.jsonBinAPi + page_url,
+      environment.jsonBinAPi + '/b',
+      {
+        headers: headers
+      }
+    ).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
+  }
+
+  read(bin_name?:string){
+    let headers = new HttpHeaders();
+    headers = headers.append('X-Bin-Meta', "false");
+
+    if (!environment.xMasterKey) {
+      headers = headers.append('X-Master-Key', environment.xMasterKey);
+    }
+
+    if (!environment.xAccessKey) {
+      headers = headers.append('X-Access-Key', environment.xAccessKey);
+    }
+    return this.http.put(
+      environment.jsonBinAPi + '/b/'+bin_name!,
       {
         headers: headers
       }

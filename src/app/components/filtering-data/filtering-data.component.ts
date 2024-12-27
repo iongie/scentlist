@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, input, OnChanges, output, SimpleChanges } from '@angular/core';
 import { FilterDataService } from '../../services/filter-data/filter-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-filtering-data',
@@ -19,7 +20,8 @@ export class FilteringDataComponent implements OnChanges {
   activeFilterType!: string;
 
   constructor(
-    private filterService: FilterDataService
+    private filterService: FilterDataService, 
+    private router: Router
   ){
 
   }
@@ -80,11 +82,14 @@ export class FilteringDataComponent implements OnChanges {
     }
 
     applyFilters(){
-      this.filterService.updateNote(this.activeFilterNote);
-      this.filterService.updateStrength(this.activeFilterStrength);
-      this.filterService.updateType(this.activeFilterType);
-      this.closeView.emit(false);
-      this.view = false;
+      this.router.navigate(['/'])
+      setTimeout(() => {
+        this.filterService.updateNote(this.activeFilterNote);
+        this.filterService.updateStrength(this.activeFilterStrength);
+        this.filterService.updateType(this.activeFilterType);
+        this.closeView.emit(false);
+        this.view = false;
+      }, 500);
     }
 
     resetFilters(){
@@ -96,5 +101,6 @@ export class FilteringDataComponent implements OnChanges {
       this.activeFilterType = undefined!;
       this.closeView.emit(false);
       this.view = false;
+      this.router.navigate(['/'])
     }
 }
