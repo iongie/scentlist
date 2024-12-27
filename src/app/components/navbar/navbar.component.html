@@ -25,17 +25,17 @@
                     </div>
                 </div>
                 <div (click)="openFiltering()"
-                    class="flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
-                    <span class="material-icons">help</span>
-                    <span class="">Help</span>
-                </div>
-                <div (click)="openInfoApp()"
-                    class="flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                     <span class="material-icons">tune</span>
                     <span class="">Setting</span>
                 </div>
+                <div (click)="openInfoApp()" 
+                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    <span class="material-icons">help</span>
+                    <span class="">Help</span>
+                </div>
                 <a [routerLink]="'formula'"
-                    class="flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                     <span class="material-icons">science</span>
                     <span class="">Formula</span>
                 </a>
@@ -88,20 +88,16 @@
                                 <span>Home</span>
                             </a>
                         </li>
-                        <li>
-                            <div (click)="openFiltering()"
-                                class="flex items-center justify-start gap-1 py-2 px-3 text-gray-900 rounded hover:bg-gray-100">
-                                <span class="material-icons">help</span>
-                                <span class="">Help</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div (click)="openInfoApp()"
-                                class="flex items-center justify-start gap-1 py-2 px-3 text-gray-900 rounded hover:bg-gray-100">
-                                <span class="material-icons">tune</span>
-                                <span class="">Setting</span>
-                            </div>
-                        </li>
+                        <div (click)="openFiltering()"
+                            class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                            <span class="material-icons">tune</span>
+                            <span class="">Setting</span>
+                        </div>
+                        <div (click)="openInfoApp()" 
+                            class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                            <span class="material-icons">help</span>
+                            <span class="">Help</span>
+                        </div>
                     </ul>
                 </div>
             </div>
