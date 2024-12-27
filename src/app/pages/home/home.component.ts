@@ -37,10 +37,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.formula = {
-      name: 'Name formula',
-      detail: []
-    }
+    this.formulaService.getFormulaBasket
+    .pipe(
+      tap(x=>{
+        this.formula = x
+      }),
+      takeUntil(this.destroy)
+    )
+    .subscribe()
     this.filter();
     this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
       let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
