@@ -25,22 +25,22 @@
                     </div>
                 </div>
                 <div (click)="openFiltering()"
-                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                     <span class="material-icons">tune</span>
                     <span class="">Setting</span>
                 </div>
                 <div (click)="openInfoApp()" 
-                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                     <span class="material-icons">help</span>
                     <span class="">Help</span>
                 </div>
                 <a [routerLink]="'formula'"
-                    class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                    class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                     <span class="material-icons">science</span>
                     <span class="">Formula</span>
                 </a>
                 <button [routerLink]="'basket-formula'" type="button"
-                    class="relative inline-flex items-center px-5 py-1.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="cursor-pointer relative inline-flex items-center px-5 py-1.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <span class="material-icons">shopping_cart</span>
                     <span class="sr-only">Formula</span>
                     <ng-container *ngIf="lengthFormula">
@@ -50,7 +50,7 @@
                     </ng-container>
                 </button>
                 <button data-collapse-toggle="navbar-search" type="button"
-                    class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                    class="cursor-pointer inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     aria-controls="navbar-search" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -64,7 +64,7 @@
                 <div class="grid grid-cols-1 pt-8 relative md:hidden">
                     <div class="relative md:block">
                         <button type="button" id="default-search"
-                            class="md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
+                            class="cursor-pointer md:w-72 w-full px-4 py-2 text-sm text-gray-500 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
                             <div class="flex items-center justify-center gap-4">
                                 <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 20 20">
@@ -79,7 +79,7 @@
                         </button>
                     </div>
                     <ul
-                        class="w-full font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 ">
+                        class="cursor-pointer w-full font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 ">
                         <li>
                             <a [routerLink]="'/'"
                                 class="flex items-center justify-start gap-1 py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent "
@@ -89,12 +89,12 @@
                             </a>
                         </li>
                         <div (click)="openFiltering()"
-                            class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                            class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                             <span class="material-icons">tune</span>
                             <span class="">Setting</span>
                         </div>
                         <div (click)="openInfoApp()" 
-                            class="hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
+                            class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-500 rounded hover:bg-gray-100">
                             <span class="material-icons">help</span>
                             <span class="">Help</span>
                         </div>

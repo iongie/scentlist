@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, input, output, SimpleChanges } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-searching-data',
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './searching-data.component.html',
   styleUrl: './searching-data.component.css'
@@ -13,6 +15,7 @@ export class SearchingDataComponent {
   view!: boolean;
   openView = input<boolean>();
   closeView = output<boolean>();
+  textSearch !: string;
   closeInfo() {
     this.closeView.emit(false);
     this.view = false;
