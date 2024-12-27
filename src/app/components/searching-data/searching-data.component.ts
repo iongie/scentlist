@@ -25,6 +25,11 @@ export class SearchingDataComponent {
     if (changes['openView']) {
       this.view = changes['openView'].currentValue
     }
+
+    if (changes['textSearch']) {
+      console.log(changes['textSearch'].currentValue);
+      
+    }
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -35,10 +40,20 @@ export class SearchingDataComponent {
       this.escape();
       return;
     }
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.enter();
+      return;
+    }
   }
 
   escape() {
     this.closeView.emit(false);
     this.view = false;
+  }
+
+  enter(){
+    
   }
 }
