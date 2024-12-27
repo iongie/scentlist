@@ -1,0 +1,141 @@
+<div class="my-20 p-2">
+    <div class="mb-6">
+        <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Name</label>
+        <input [(ngModel)]="formula.name" type="text" id="large-input"
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6">
+        <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Type</label>
+        <input [(ngModel)]="formula.type" type="text" id="large-input"
+            class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    </div>
+    <div class="mb-6">
+        <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900">Formula</label>
+        <div class="columns-1 gap-4 space-y-4" [ngClass]="ganjil ?'md:columns-4':'md:columns-3'">
+            <ng-container *ngFor="let raw of formula.detail; let i = index">
+                <div class="w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid active:motion-scale-in-[0.44] active:motion-blur-in-[10px] active:motion-delay-[0.75s]/blur"
+                    [ngClass]="raw.height == 'small'? 'bg-emerald-100 divide-emerald-200':'bg-teal-100 divide-teal-200'"
+                    (click)="deleteFormula(i)">
+                    <div class="flex flex-col items-start w-full p-4 overflow-auto">
+                        <span class="text-xs font-semibold px-2 py-0.5 border rounded-full text-center"
+                            [ngClass]="raw.height == 'small'? 'border-emerald-500':'border-teal-500'">
+                            {{raw.category}}
+                        </span>
+                        <span class="text-2xl font-semibold">
+                            {{raw.ingredient}}
+                        </span>
+                        <span class="text-base">
+                            {{raw.cas}}
+                        </span>
+                        <span class="text-xs pt-1">
+                            {{raw.filiation}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Formula :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.molecular_formula}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Weight :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.molecular_weight}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Boiling Point :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.boiling_point}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Log P :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.logP}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Vapor pressure :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.vapor_pressure}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Soluble :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.soluble}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Insoluble :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.insoluble}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Stability :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.stability}}
+                        </span>
+                        <span class="text-sm font-semibold pt-2">
+                            Odor strength :
+                        </span>
+                        <span class="text-xs font-semibold">
+                            {{raw.odor_strength}}
+                        </span>
+                        <ng-container *ngFor="let detailRaw of raw.details; let i = index">
+                            <ng-container *ngIf="detailRaw.category === 'Major Components'">
+                                <span class="text-sm font-semibold pt-2">
+                                    Major Components :
+                                </span>
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.info}}
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="detailRaw.category === 'Other names'">
+                                <span class="text-sm font-semibold pt-2">
+                                    Other names :
+                                </span>
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.info}}
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="detailRaw.category === 'Uses in perfumery'">
+                                <span class="text-sm font-semibold pt-2">
+                                    Use :
+                                </span>
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.info}}
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="detailRaw.category === 'Detection Threshold'">
+                                <span class="text-sm font-semibold pt-2">
+                                    Detection Threshold :
+                                </span>
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.info}}
+                                </span>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                    <div class="flex flex-col items-start w-full px-4 py-2">
+                        <ng-container *ngFor="let detailRaw of raw.details; let i = index">
+                            <ng-container *ngIf="detailRaw.category === 'Volatility'">
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.info}}
+                                </span>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2">
+        <button (click)="saveFormula()" type="button"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Simpan</button>
+        <button (click)="cancelFormula()" type="button"
+            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Batal</button>
+    </div>
+</div>

@@ -2,10 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as goodScent from "../../../../public/good_scent_raw_material.json";
 import * as synthetics from "../../../../public/synthetics_detail_raw_material.json";
 import * as listGs from "../../../../public/list_good_scent_raw_material.json";
-import { combineLatest, Subject, takeUntil, tap } from 'rxjs';
+import { combineLatest, of, Subject, switchAll, switchMap, takeUntil, tap } from 'rxjs';
 import { RawMaterial } from '../../interfaces/raw-material.interface';
 import { CommonModule } from '@angular/common';
 import { FilterDataService } from '../../services/filter-data/filter-data.service';
+import { FormulasService } from '../../services/formulas/formulas.service';
+import { Formulas } from '../../interfaces/formula.interface';
 
 @Component({
   selector: 'app-home',
@@ -23,9 +25,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   rawMaterial!: RawMaterial[]
   ganjil!: boolean;
   normalView!: boolean;
-
+  formula!: Formulas;
   constructor(
-    private filterService: FilterDataService
+    private filterService: FilterDataService,
+    private formulaService: FormulasService
   ) { }
 
   ngOnDestroy(): void {
@@ -34,6 +37,10 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.formula = {
+      name: 'Name formula',
+      detail: []
+    }
     this.filter();
     this.rawMaterial = this.goodScentRaw.map((gsr, i) => {
       let gs = this.syntheticsRaw.filter((val, isr) => val.ingredient === gsr.ingredient)[0]
@@ -92,7 +99,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               data.filiation?.replace(/\s+/g, '').toLowerCase().includes(normalizedSearch)
             );
           }
-          
+
           this.rawMaterial = this.rawMaterial.map((data, index) => {
             return {
               ...data,
@@ -111,6 +118,11 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   kecilkan() {
     this.normalView = !this.normalView;
+  }
+
+  async addFormula(i: number) {
+    await this.formula.detail.push(this.rawMaterial[i]);
+    await this.formulaService.updateFormula(this.formula);
   }
 
 }

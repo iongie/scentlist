@@ -7,11 +7,15 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'home',
+        loadComponent: () => import('./pages/home/home.component').then(c => c.HomeComponent)
+    },
+    {
         path: 'formula',
         loadComponent: () => import('./pages/formula/formula.component').then(c => c.FormulaComponent)
     },
     {
-        path: 'home',
-        loadComponent: () => import('./pages/home/home.component').then(c => c.HomeComponent)
+        path: 'basket-formula',
+        loadComponent: () => import('./pages/basket-formula/basket-formula.component').then(c => c.BasketFormulaComponent)
     },
 ];

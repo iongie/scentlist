@@ -2,8 +2,8 @@
 <div class="my-20">
     <div class="columns-1 gap-4 space-y-4" [ngClass]="ganjil ?'md:columns-4':'md:columns-3'">
         <ng-container *ngFor="let raw of rawMaterial; let i = index">
-            <div class="w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid"
-                [ngClass]="raw.height == 'small'? 'bg-emerald-100 divide-emerald-200':'bg-teal-100 divide-teal-200'">
+            <div class="w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid active:motion-scale-in-[0.44] active:motion-blur-in-[10px] active:motion-delay-[0.75s]/blur"
+                [ngClass]="raw.height == 'small'? 'bg-emerald-100 divide-emerald-200':'bg-teal-100 divide-teal-200'" (click)="addFormula(i)">
                 <div class="flex flex-col items-start w-full p-4 overflow-auto">
                     <span class="text-xs font-semibold px-2 py-0.5 border rounded-full text-center"
                         [ngClass]="raw.height == 'small'? 'border-emerald-500':'border-teal-500'">
