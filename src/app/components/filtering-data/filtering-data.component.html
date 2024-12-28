@@ -51,7 +51,7 @@
             <h4 class="text-base font-medium mb-4 text-left px-5">Filter by Odor Type</h4>
             <div class="flex flex-wrap gap-2 px-5">
                 <button
-                    *ngFor="let category of ['All', 'Ambery', 'Animalic', 'Balsamic', 'Burnt', 'Citrus', 'Green', 'Floral', 'Flower', 'Fruity', 'Honeyed', 'Lily', 'Marine', 'Musky', 'Rosy', 'Spicy', 'Undergrowth', 'Violet', 'Woody', 'Zetsy']"
+                    *ngFor="let category of ['All', 'Ambery', 'Animalic', 'Aqua', 'Balsamic', 'Berries', 'Burnt', 'Citrus', 'Green', 'Floral', 'Flower', 'Fruity', 'Honeyed', 'Jasmine', 'Lily', 'Marine', 'Musky', 'Rosy', 'Spicy', 'Undergrowth', 'Violet', 'Woody', 'Ylang', 'Zetsy']"
                     type="button" (click)="selectType(category === 'All' ? undefined : category)"
                     class="text-sm font-medium px-4 py-2.5 text-center rounded-full transition-colors duration-200"
                     [ngClass]="{
