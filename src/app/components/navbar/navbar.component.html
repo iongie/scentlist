@@ -5,13 +5,12 @@
                 <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap">Scentist</span>
             </a>
-            <div class="flex gap-2 md:order-2">
-                <a [routerLink]="'/'"
-                    class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100"
-                    aria-current="page">
+            <div class="flex items-center gap-2 md:order-2">
+                <div (click)="gotoHome()"
+                    class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
                     <span class="material-icons">home</span>
-                    <span>Home</span>
-                </a>
+                    <span class="">Home</span>
+                </div>
                 <div (click)="openFiltering()"
                     class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
                     <span class="material-icons">tune</span>
@@ -22,11 +21,11 @@
                     <span class="material-icons">help</span>
                     <span class="">Help</span>
                 </div>
-                <a [routerLink]="'formula'"
+                <div (click)="gottoFormula()"
                     class="cursor-pointer hidden md:flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
                     <span class="material-icons">science</span>
                     <span class="">Formula</span>
-                </a>
+                </div>
                 <!-- <div class="md:flex gap-4 relative hidden">
                     <div class="relative md:block">
                         <button type="button" id="default-search"
@@ -45,9 +44,9 @@
                         </button>
                     </div>
                 </div> -->
-                <button [routerLink]="'basket-formula'" type="button"
-                    class="cursor-pointer relative inline-flex items-center px-5 py-1.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-                    <span class="material-icons">shopping_cart</span>
+                <button (click)="gottoBasket()" type="button"
+                    class="cursor-pointer relative flex justify-center items-center px-2 py-1.5 w-8 h-8 text-sm font-medium text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full">
+                    <span class="material-icons text-base">shopping_cart</span>
                     <span class="sr-only">Formula</span>
                     <ng-container *ngIf="lengthFormula">
                         <div
@@ -56,10 +55,10 @@
                     </ng-container>
                 </button>
                 <button (click)="syncAction()" type="button"
-                    class="cursor-pointer relative inline-flex items-center px-5 py-1.5 text-sm font-medium text-center text-white bg-teal-700 rounded-lg hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300">
+                    class="cursor-pointer relative flex justify-center items-center px-2 py-1.5 w-8 h-8 text-sm font-medium text-white bg-teal-700 rounded-full hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300">
                     <span class="material-icons">sync</span>
                 </button>
-                <button data-collapse-toggle="navbar-search" type="button"
+                <button (click)="openMenu()" type="button"
                     class="cursor-pointer inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-700 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
                     aria-controls="navbar-search" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
@@ -70,52 +69,51 @@
                     </svg>
                 </button>
             </div>
-            <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
-                <div class="grid grid-cols-1 pt-8 relative md:hidden">
-                    <!-- <div class="relative md:block">
-                        <button type="button" id="default-search"
-                            class="cursor-pointer md:w-72 w-full px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
-                            <div class="flex items-center justify-center gap-4">
-                                <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                </svg>
-                                Search
-                            </div>
-                            <div>
-                                Ctrl U
-                            </div>
-                        </button>
-                    </div> -->
-                    <ul
-                        class="cursor-pointer w-full font-medium flex flex-col md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 ">
-                        <li>
-                            <a [routerLink]="'/'"
-                                class="flex items-center justify-start gap-1 py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent "
-                                aria-current="page">
+            <ng-container *ngIf="statusMenu">
+                <div class="items-center justify-between w-full flex md:w-auto md:order-1">
+                    <div class="grid grid-cols-1 pt-8 relative md:hidden w-full">
+                        <!-- <div class="relative md:block">
+                            <button type="button" id="default-search"
+                                class="cursor-pointer md:w-72 w-full px-4 py-2 text-sm text-gray-700 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 flex items-center justify-between">
+                                <div class="flex items-center justify-center gap-4">
+                                    <svg class="w-4 h-4 text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                    Search
+                                </div>
+                                <div>
+                                    Ctrl U
+                                </div>
+                            </button>
+                        </div> -->
+                        <ul
+                            class="cursor-pointer w-full font-medium flex flex-col md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 ">
+                            <div (click)="gotoHome()"
+                                class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
                                 <span class="material-icons">home</span>
-                                <span>Home</span>
-                            </a>
-                        </li>
-                        <div (click)="openFiltering()"
-                            class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
-                            <span class="material-icons">tune</span>
-                            <span class="">Setting</span>
-                        </div>
-                        <div (click)="openInfoApp()"
-                            class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
-                            <span class="material-icons">help</span>
-                            <span class="">Help</span>
-                        </div>
-                        <a [routerLink]="'formula'"
-                            class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
-                            <span class="material-icons">science</span>
-                            <span class="">Formula</span>
-                        </a>
-                    </ul>
+                                <span class="">Home</span>
+                            </div>
+                            <div (click)="openFiltering()"
+                                class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
+                                <span class="material-icons">tune</span>
+                                <span class="">Setting</span>
+                            </div>
+                            <div (click)="openInfoApp()"
+                                class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
+                                <span class="material-icons">help</span>
+                                <span class="">Help</span>
+                            </div>
+                            <div (click)="gottoFormula()"
+                                class="cursor-pointer flex items-center justify-start gap-1 py-2 px-3 text-gray-700 rounded hover:bg-gray-100">
+                                <span class="material-icons">science</span>
+                                <span class="">Formula</span>
+                            </div>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </ng-container>
         </div>
     </nav>
 

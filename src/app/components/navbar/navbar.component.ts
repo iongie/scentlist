@@ -5,7 +5,7 @@ import { SearchingDataComponent } from "../searching-data/searching-data.compone
 import { InfoComponent } from "../info/info.component";
 import { FormulasService } from '../../services/formulas/formulas.service';
 import { combineLatest, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CallApiService } from '../../services/call-api/call-api.service';
 
 @Component({
@@ -22,9 +22,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
   infoApp!: boolean;
   searchingData!: boolean;
   lengthFormula!:number;
+  statusMenu: boolean = false;
   constructor(
     private formulaService: FormulasService,
-    private callApiService: CallApiService
+    private callApiService: CallApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy.next();
     this.destroy.complete();
+    this.statusMenu = false
   }
 
 
@@ -81,6 +84,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   openFiltering() {
     this.filteringData = true;
+    this.statusMenu = false
   }
 
   closeFiltering(event: boolean) {
@@ -89,6 +93,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   openInfoApp() {
     this.infoApp = true;
+    this.statusMenu = false
   }
 
   closeInfoApp(event: boolean) {
@@ -97,10 +102,31 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   openSearching() {
     this.searchingData = true;
+    this.statusMenu = false
   }
 
   closeSearching(event: boolean) {
     this.searchingData = event;
+  }
+
+  openMenu(){
+    this.statusMenu = !this.statusMenu;
+    console.log(this.statusMenu);
+  }
+
+  gotoHome(){
+    this.router.navigate(['/']);
+    this.statusMenu = false
+  }
+
+  gottoBasket(){
+    this.router.navigate(['basket-formula']);
+    this.statusMenu = false
+  }
+
+  gottoFormula(){
+    this.router.navigate(['formula']);
+    this.statusMenu = false
   }
 
   syncAction(){
