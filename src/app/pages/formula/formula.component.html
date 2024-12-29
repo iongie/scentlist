@@ -2,7 +2,7 @@
     <div class="columns-1 gap-4 space-y-4" [ngClass]="ganjil ?'md:columns-4':'md:columns-3'">
         <ng-container *ngFor="let raw of formulas; let i = index">
             <div
-                class="bg-emerald-100 divide-emerald-200 w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid active:motion-scale-in-[0.44] active:motion-blur-in-[10px] active:motion-delay-[0.75s]/blur">
+                class="bg-emerald-100 divide-emerald-200 w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid">
                 <div class="flex flex-col items-start w-full p-4 overflow-auto">
                     <div class="text-2xl font-semibold">
                         {{raw.name}}
