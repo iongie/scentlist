@@ -39,9 +39,12 @@ export class FormulaComponent implements OnInit, OnDestroy {
   }
 
   deleteAction(i: number){
-    this.formulas.splice(i, 1);
+    if (i < 0 || i >= this.formulas.length) {
+      return;
+    }
+
+    this.formulas[i] = { ...this.formulas[i], deleted:true };
     this.formulaService.delete(this.formulas)
-    console.log(this.formulas);
   }
 
 }

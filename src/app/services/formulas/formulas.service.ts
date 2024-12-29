@@ -47,7 +47,10 @@ export class FormulasService {
 
     // Gabungkan dan hapus duplikat
     const mergedData = [...local, ...online];
-    const result = mergedData.filter(item => {
+    const filteredData = mergedData.filter(item => !item.deleted);
+    console.log(filteredData);
+    
+    const result = filteredData.filter(item => {
       const key = JSON.stringify(item);
       if (uniqueData.has(key)) {
         return false;
@@ -56,6 +59,7 @@ export class FormulasService {
       return true;
     });
 
+    this.formulas.next(result)
     localStorage.setItem('formulas', JSON.stringify(result))
     return result;
   }

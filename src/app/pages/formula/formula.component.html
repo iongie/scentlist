@@ -1,46 +1,48 @@
 <div class="my-20">
     <div class="columns-1 gap-4 space-y-4" [ngClass]="ganjil ?'md:columns-4':'md:columns-3'">
         <ng-container *ngFor="let raw of formulas; let i = index">
-            <div
-                class="bg-emerald-100 divide-emerald-200 w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid">
-                <div class="flex flex-col items-start w-full p-4 overflow-auto">
-                    <div class="text-2xl font-semibold">
-                        {{raw.name}}
-                    </div>
-                    <div class="text-base">
-                        {{raw.type}}
-                    </div>
-                    <div class="text-sm font-semibold pt-2">
-                        Name Material :
-                    </div>
-                    <ng-container *ngFor="let detailRaw of raw.detail; let i = index">
-                        <div class="flex gap-1 items-center justify-start">
-                            <span class="text-xs font-semibold">
-                                {{detailRaw.ingredient}}
-                            </span>
-                            <ng-container *ngFor="let detail of detailRaw.details; let i = index">
-                                <ng-container *ngIf="detail.category === 'Volatility'">
-                                    <span class="text-xs font-semibold">
-                                        ({{detail.info}})
-                                    </span>
+            <ng-container *ngIf="!raw.deleted">
+                <div
+                    class="bg-emerald-100 divide-emerald-200 w-full rounded-xl shadow flex flex-col divide-y justify-between items-start gap-2 break-inside-avoid">
+                    <div class="flex flex-col items-start w-full p-4 overflow-auto">
+                        <div class="text-2xl font-semibold">
+                            {{raw.name}}
+                        </div>
+                        <div class="text-base">
+                            {{raw.type}}
+                        </div>
+                        <div class="text-sm font-semibold pt-2">
+                            Name Material :
+                        </div>
+                        <ng-container *ngFor="let detailRaw of raw.detail; let i = index">
+                            <div class="flex gap-1 items-center justify-start">
+                                <span class="text-xs font-semibold">
+                                    {{detailRaw.ingredient}}
+                                </span>
+                                <ng-container *ngFor="let detail of detailRaw.details; let i = index">
+                                    <ng-container *ngIf="detail.category === 'Volatility'">
+                                        <span class="text-xs font-semibold">
+                                            ({{detail.info}})
+                                        </span>
+                                    </ng-container>
                                 </ng-container>
-                            </ng-container>
+                            </div>
+                        </ng-container>
+                        <div class="text-sm font-semibold pt-2">
+                            Filiation :
                         </div>
-                    </ng-container>
-                    <div class="text-sm font-semibold pt-2">
-                        Filiation :
-                    </div>
-                    <ng-container *ngFor="let detailRaw of raw.detail; let i = index">
-                        <div class="text-xs font-semibold">
-                            {{detailRaw.filiation}}
+                        <ng-container *ngFor="let detailRaw of raw.detail; let i = index">
+                            <div class="text-xs font-semibold">
+                                {{detailRaw.filiation}}
+                            </div>
+                        </ng-container>
+                        <div (click)="deleteAction(i)"
+                            class="cursor-pointer self-end flex items-center justify-center gap-1 px-3 text-black rounded hover:text-red-500">
+                            <span class="material-icons text-base">delete</span>
                         </div>
-                    </ng-container>
-                    <div (click)="deleteAction(i)"
-                        class="cursor-pointer self-end flex items-center justify-center gap-1 px-3 text-black rounded hover:text-red-500">
-                        <span class="material-icons text-base">delete</span>
                     </div>
                 </div>
-            </div>
+            </ng-container>
         </ng-container>
     </div>
 </div>
