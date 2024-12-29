@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, throwError } from 'rxjs';
+import { Formulas } from '../../interfaces/formula.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,28 +13,19 @@ export class CallApiService {
     private http: HttpClient,
   ) { }
 
-  create(bin_name?:string){
+  read(){
     let headers = new HttpHeaders();
-    headers = headers.append('X-Bin-Private', "true");
+    headers = headers.append('X-Bin-Meta', "false");
 
-    if (!environment.xMasterKey) {
+    if (environment.xMasterKey) {
       headers = headers.append('X-Master-Key', environment.xMasterKey);
     }
 
-    if (!environment.xAccessKey) {
+    if (environment.xAccessKey) {
       headers = headers.append('X-Access-Key', environment.xAccessKey);
     }
-
-    if (!environment.collectionId) {
-      headers = headers.append('X-Collection-Id', environment.collectionId);
-    }
-
-    if (!bin_name) {
-      headers = headers.append('X-Bin-Name', bin_name!);
-    }
-    
     return this.http.get(
-      environment.jsonBinAPi + '/b',
+      environment.jsonBinAPi + 'b/'+environment.binId,
       {
         headers: headers
       }
@@ -44,19 +36,22 @@ export class CallApiService {
     );
   }
 
-  read(bin_name?:string){
+  update(data: Formulas[]){
     let headers = new HttpHeaders();
-    headers = headers.append('X-Bin-Meta', "false");
+    headers = headers.append('Content-Type', 'application/json');
 
-    if (!environment.xMasterKey) {
+    if (environment.xMasterKey) {
       headers = headers.append('X-Master-Key', environment.xMasterKey);
     }
 
-    if (!environment.xAccessKey) {
+    if (environment.xAccessKey) {
       headers = headers.append('X-Access-Key', environment.xAccessKey);
     }
     return this.http.put(
-      environment.jsonBinAPi + '/b/'+bin_name!,
+      environment.jsonBinAPi + 'b/'+environment.binId,
+      {
+        "formula": data
+      },
       {
         headers: headers
       }

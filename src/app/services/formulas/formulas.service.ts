@@ -17,22 +17,49 @@ export class FormulasService {
   getFormulaBasket = this.formulaBasket.asObservable();
   constructor(
     private cookieStorage: CookieService,
-  ) { 
+  ) {
     this.initializecookieStorage();
   }
 
   private async initializecookieStorage() {
     const storedLogin = await localStorage.getItem('formulas');
-    await this.formulas.next(storedLogin! ? JSON.parse(storedLogin): []);
+    await this.formulas.next(storedLogin! ? JSON.parse(storedLogin) : []);
   }
 
   async update(formulas: Formulas) {
     const storedLogin = await localStorage.getItem('formulas');
-    const parse: Formulas[] = await storedLogin! ? JSON.parse(storedLogin!): []
+    const parse: Formulas[] = await storedLogin! ? JSON.parse(storedLogin!) : []
     await parse.push(formulas)
     await this.formulas.next(parse)
     await localStorage.setItem('formulas', JSON.stringify(parse))
   }
+
+  async delete(formulas: Formulas[]) {
+    await localStorage.setItem('formulas', JSON.stringify(formulas))
+  }
+
+  // Fungsi sinkronisasi data JSON
+  syncData(online: Formulas[]) {
+    
+    const storedLogin = localStorage.getItem('formulas');
+    const local: Formulas[] = storedLogin! ? JSON.parse(storedLogin!) : []
+    const uniqueData = new Set<string>();
+
+    // Gabungkan dan hapus duplikat
+    const mergedData = [...local, ...online];
+    const result = mergedData.filter(item => {
+      const key = JSON.stringify(item);
+      if (uniqueData.has(key)) {
+        return false;
+      }
+      uniqueData.add(key);
+      return true;
+    });
+
+    localStorage.setItem('formulas', JSON.stringify(result))
+    return result;
+  }
+
 
   async updateFormula(formula: Formulas) {
     this.formulaBasket.next(formula)

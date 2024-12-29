@@ -38,4 +38,10 @@ export class FormulaComponent implements OnInit, OnDestroy {
     ).subscribe()
   }
 
+  deleteAction(i: number){
+    this.formulas.splice(i, 1);
+    this.formulaService.delete(this.formulas)
+    console.log(this.formulas);
+  }
+
 }

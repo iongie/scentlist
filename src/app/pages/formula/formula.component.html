@@ -10,9 +10,6 @@
                     <div class="text-base">
                         {{raw.type}}
                     </div>
-                    <div class="text-xs pt-1">
-                        {{raw.type}}
-                    </div>
                     <div class="text-sm font-semibold pt-2">
                         Name Material :
                     </div>
@@ -38,6 +35,10 @@
                             {{detailRaw.filiation}}
                         </div>
                     </ng-container>
+                    <div (click)="deleteAction(i)"
+                        class="cursor-pointer self-end flex items-center justify-center gap-1 px-3 text-black rounded hover:text-red-500">
+                        <span class="material-icons text-base">delete</span>
+                    </div>
                 </div>
             </div>
         </ng-container>

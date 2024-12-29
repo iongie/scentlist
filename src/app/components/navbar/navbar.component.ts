@@ -4,8 +4,9 @@ import { FilteringDataComponent } from "../filtering-data/filtering-data.compone
 import { SearchingDataComponent } from "../searching-data/searching-data.component";
 import { InfoComponent } from "../info/info.component";
 import { FormulasService } from '../../services/formulas/formulas.service';
-import { Subject, takeUntil, tap } from 'rxjs';
+import { combineLatest, of, Subject, switchMap, takeUntil, tap } from 'rxjs';
 import { RouterModule } from '@angular/router';
+import { CallApiService } from '../../services/call-api/call-api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,7 +23,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   searchingData!: boolean;
   lengthFormula!:number;
   constructor(
-    private formulaService: FormulasService
+    private formulaService: FormulasService,
+    private callApiService: CallApiService
   ) { }
 
   ngOnInit(): void {
@@ -99,5 +101,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   closeSearching(event: boolean) {
     this.searchingData = event;
+  }
+
+  syncAction(){
+    this.callApiService.read()
+    .pipe(
+      switchMap((x:any)=>{
+        return of(this.formulaService.syncData(x.formula))
+      }),
+      switchMap((x)=> this.callApiService.update(x)),
+      tap(val=> console.log(val)),
+      takeUntil(this.destroy)
+    ).subscribe()
   }
 }
