@@ -43,3 +43,5 @@ Thumbs.db
 
 # File JSON
 json
+
+/src/environments
